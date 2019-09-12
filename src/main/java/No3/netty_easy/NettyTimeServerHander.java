@@ -9,6 +9,6 @@ import io.netty.util.concurrent.EventExecutorGroup;
 public class NettyTimeServerHander extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println();
+        System.out.println(1111);
     }
 }
