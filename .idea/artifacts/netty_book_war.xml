@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="netty-book:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="book.war">
+      <element id="artifact" artifact-name="netty-book:war exploded" />
+    </root>
+  </artifact>
+</component>
