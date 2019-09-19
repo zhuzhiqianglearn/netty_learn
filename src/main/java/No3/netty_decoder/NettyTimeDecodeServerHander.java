@@ -1,16 +1,10 @@
-package No3.netty_easy;
+package No3.netty_decoder;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.concurrent.EventExecutorGroup;
 
-import java.nio.ByteBuffer;
-
-public class NettyTimeServerHander extends ChannelInboundHandlerAdapter {
+public class NettyTimeDecodeServerHander extends ChannelInboundHandlerAdapter {
     int count=1;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
