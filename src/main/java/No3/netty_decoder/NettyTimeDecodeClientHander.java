@@ -22,12 +22,12 @@ public class NettyTimeDecodeClientHander extends ChannelInboundHandlerAdapter {
 //            ctx.writeAndFlush(message);
 //        }
         ByteBuf buf=null;
-                    byte[] req1="abc".getBytes();
+                    byte[] req1="abc$_".getBytes();
 
         for (int i = 0; i < 100; i++) {
 //            byte[] req1=(System.currentTimeMillis() + "").getBytes();
-            buf=Unpooled.buffer(req.length);
-            buf.writeBytes(req);
+            buf=Unpooled.buffer(req1.length);
+            buf.writeBytes(req1);
             ctx.writeAndFlush(buf);
         }
     }
