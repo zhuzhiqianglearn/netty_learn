@@ -14,7 +14,7 @@ public class NettyTimeDecodeServerHander extends ChannelInboundHandlerAdapter {
         String body=(String) msg;
         System.out.println("client:"+msg+"====="+count);
         count++;
-        ctx.writeAndFlush(Unpooled.copiedBuffer((System.currentTimeMillis()+"$_").getBytes()));
+        ctx.writeAndFlush(Unpooled.copiedBuffer((System.currentTimeMillis()+"$_server").getBytes()));
 
     }
 }
