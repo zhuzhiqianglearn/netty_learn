@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+   <textarea id="responseText">
+
+   </textarea>
+<input type="button" onclick="sendMsg()" value="send">
+</body>
+<script type="text/javascript">
+    var socket;
+    if(!window.WebSocket){
+        alert("buzhichi")
+    }
+    if(window.WebSocket){
+        socket=new WebSocket("ws://localhost:8088/websocket");
+        socket.onmessage=function (ev) {
+            var ta=document.getElementById("responseText");
+            ta.value="";
+            ta.value=ev.data;
+        }
+        socket.onopen=function (event) {
+            var ta=document.getElementById("responseText");
+            ta.value="打开WeSocket服务正常，浏览器支持websocket";
+        }
+        socket.onclose=function (event) {
+            var ta=document.getElementById("responseText");
+            ta.value="";
+            ta.value="websocket 关闭";
+        }
+
+        function sendMsg() {
+            var vaule=document.getElementById("responseText").value;
+            alert(vaule)
+            if(socket.readyState==WebSocket.OPEN){
+                socket.send(vaule)
+            }
+        }
+
+    }
+</script>
+</html>
