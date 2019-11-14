@@ -28,7 +28,7 @@ public class TimeServer3 {
 
     }
 
-    private class ChildHander extends ChannelInitializer<SocketChannel> {
+     private class ChildHander extends ChannelInitializer<SocketChannel> {
 
         @Override
         protected void initChannel(SocketChannel ch) throws Exception {

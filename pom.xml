@@ -75,6 +75,16 @@
 
       </dependency>
 
+      <dependency>
+          <groupId>org.jboss.marshalling</groupId>
+          <artifactId>jboss-marshalling-river</artifactId>
+          <version>1.4.10.Final</version>
+      </dependency>
+      <dependency>
+          <groupId>org.jboss.marshalling</groupId>
+          <artifactId>jboss-marshalling-serial</artifactId>
+          <version>1.4.11.Final</version>
+      </dependency>
 
   </dependencies>
 
@@ -145,6 +155,17 @@
                           <goal>compile</goal>
                           <goal>compile-custom</goal>
                       </goals>
+                  </execution>
+              </executions>
+          </plugin>
+          <plugin>
+              <groupId>com.moban</groupId>
+              <artifactId>mojotest</artifactId>
+              <version>1.0-SNAPSHOT</version>
+              <executions>
+                  <execution>
+                      <id>hello</id>
+                      <phase>package</phase>
                   </execution>
               </executions>
           </plugin>

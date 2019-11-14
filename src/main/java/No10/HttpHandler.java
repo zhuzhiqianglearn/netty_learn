@@ -29,7 +29,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
         try{
         		String page = uri.equals("/") ? "chat.html" : uri;
 //        		file =	new RandomAccessFile(getResource(page), "r");
-        		file=new RandomAccessFile("C:\\chat.html","r");
+        		file=new RandomAccessFile("C:\\chat.html       ","r");
         }catch(Exception e){
         		ctx.fireChannelRead(request.retain());
         		return;

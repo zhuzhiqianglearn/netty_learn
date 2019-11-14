@@ -3,9 +3,12 @@ package No11.netty_websocket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 import static io.netty.handler.codec.http.HttpUtil.isKeepAlive;
 import static io.netty.handler.codec.http.HttpUtil.setContentLength;
@@ -13,6 +16,8 @@ import static io.netty.handler.codec.http.HttpUtil.setContentLength;
 public class MyWebSocketHander extends SimpleChannelInboundHandler {
 
     private WebSocketServerHandshaker handshaker;
+    private static ChannelGroup onlineUsers = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
 
 
     @Override
@@ -45,6 +50,7 @@ public class MyWebSocketHander extends SimpleChannelInboundHandler {
         }else{
             handshaker.handshake(ctx.channel(),req);
         }
+        onlineUsers.add(ctx.channel());
 
     }
 
@@ -56,6 +62,7 @@ public class MyWebSocketHander extends SimpleChannelInboundHandler {
 //        }
         if (frame instanceof CloseWebSocketFrame) {
             handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
+            onlineUsers.remove(ctx.channel());
             return;
         }
         //判断是否是Ping消息
@@ -69,7 +76,10 @@ public class MyWebSocketHander extends SimpleChannelInboundHandler {
         }
         //返回应答消息
         String request=((TextWebSocketFrame)frame).text();
-        ctx.channel().writeAndFlush(new TextWebSocketFrame(request+",欢迎使用Netty WebSocket服务，现在时间："+new java.util.Date().toString()));
+        for (Channel onlineUser : onlineUsers) {
+            onlineUser.writeAndFlush(new TextWebSocketFrame(request));
+//            ctx.channel().writeAndFlush(new TextWebSocketFrame(request));
+        }
     }
 
     private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res){
